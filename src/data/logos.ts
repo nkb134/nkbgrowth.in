@@ -6,8 +6,8 @@ import mastercard from '../assets/logos/mastercard.svg?url';
 import pwc from '../assets/logos/pwc.svg?url';
 import rinnwealth from '../assets/logos/rinnwealth.png?url';
 
-/** Employers shown in the "Where I've worked" row, in order. */
-export const employers = ['coindcx', 'ajaib', 'mastercard', 'deloitte', 'pwc', 'infosys'] as const;
+/** Companies shown in the "Where I've worked" row, in order. */
+export const employers = ['coindcx', 'ajaib', 'mastercard', 'deloitte', 'pwc', 'infosys', 'rinnwealth'] as const;
 
 /**
  * Company logos. `ratio` is each file's width / height; `scale` evens out
@@ -20,7 +20,7 @@ export const logos = {
   deloitte: { label: 'Deloitte', url: deloitte, ratio: 5.36, scale: 1.05 },
   pwc: { label: 'PwC', url: pwc, ratio: 2.07, scale: 1.45 },
   infosys: { label: 'Infosys', url: infosys, ratio: 2.7, scale: 1.3 },
-  rinnwealth: { label: 'RinnWealth', url: rinnwealth, ratio: 0.59, scale: 1.9 },
+  rinnwealth: { label: 'RinnWealth', url: rinnwealth, ratio: 0.59, scale: 1.5, named: true },
 };
 
 export type LogoName = keyof typeof logos;

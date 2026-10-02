@@ -1,7 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import Logo from './Logo.astro';
-import { employers } from '../data/logos';
+import { employers, logos } from '../data/logos';
 import { credentials } from '../data/site';
 ---
 
@@ -12,6 +12,7 @@ import { credentials } from '../data/site';
       employers.map((name) => (
         <li>
           <Logo name={name} />
+          {'named' in logos[name] && <span aria-hidden="true">{logos[name].label}</span>}
         </li>
       ))
     }
@@ -48,6 +49,22 @@ import { credentials } from '../data/site';
     padding-block: 1.25rem;
     border-block: 1px solid var(--rule);
     color: var(--ink);
+  }
+
+  /* A mark with no wordmark of its own gets its name set beside it. */
+  .trust__logos li {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .trust__logos span {
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    font-weight: 800;
+    font-stretch: 80%;
+    letter-spacing: -0.015em;
+    line-height: 1;
   }
 
   .trust__marks {
