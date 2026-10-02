@@ -1,0 +1,68 @@
+---
+import Icon from './Icon.astro';
+import { nav, site } from '../data/site';
+---
+
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="nav__name" href="#top">{site.shortName}</a>
+    <nav aria-label="Sections">
+      <ul class="nav__links">
+        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+    <a class="btn btn--solid btn--small" href={`mailto:${site.email}`}>
+      <Icon name="mail" />
+      Email me
+    </a>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    min-height: 3.75rem;
+  }
+
+  .nav__name {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+    font-stretch: 80%;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  .nav__links {
+    display: none;
+    gap: clamp(1rem, 2.5vw, 2rem);
+    font-size: 0.95rem;
+  }
+
+  .nav__links a {
+    text-decoration: none;
+    padding-block: 0.4rem;
+  }
+
+  .nav__links a:hover {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 52rem) {
+    .nav__links {
+      display: flex;
+    }
+  }
+</style>

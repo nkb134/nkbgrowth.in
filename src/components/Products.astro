@@ -1,0 +1,173 @@
+---
+import { Image } from 'astro:assets';
+import ChatDemo from './ChatDemo.astro';
+import Phone from './Phone.astro';
+import Product from './Product.astro';
+import studioIcon from '../assets/icons/tara-studio.png';
+import jyotishIcon from '../assets/icons/tara-jyotish.png';
+import studioPoster from '../assets/tara/studio-poster.jpg';
+import bookCover from '../assets/tara/book-cover.webp';
+import bookPage from '../assets/tara/book-p05.webp';
+import { jyotish, jyotishChat, studio, traction } from '../data/products';
+---
+
+<section class="section wrap" id="products" aria-labelledby="products-title">
+  <div class="section-head" data-reveal>
+    <p class="label">Building now</p>
+    <h2 id="products-title">Two AI products that <span class="hi">sell inside a chat</span></h2>
+    <p>
+      Both run on WhatsApp, take payment by UPI without leaving the conversation, and are built and run by
+      me: onboarding, generation pipeline, payments and the acquisition funnel.
+    </p>
+  </div>
+
+  <dl class="traction" data-reveal>
+    {
+      traction.map((t) => (
+        <div>
+          <dt>{t.label}</dt>
+          <dd>{t.value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+  <p class="traction__note label">Both Tara products combined</p>
+
+  <Product product={studio} icon={studioIcon}>
+    <Fragment slot="demo">
+      <figure class="video">
+        <Phone name={studio.name} icon={studioIcon} status="product demo · 39 s">
+          <video
+            controls
+            playsinline
+            preload="none"
+            poster={studioPoster.src}
+            aria-label="Tara AI Studio product demo video"
+          >
+            <source src="/media/tara-studio-demo.mp4" type="video/mp4" />
+          </video>
+        </Phone>
+        <figcaption>The video a new user gets as Tara’s first message. Press play; it has sound.</figcaption>
+      </figure>
+
+      <div class="outputs">
+        <p class="label">What it makes</p>
+        <ul class="stickers">
+          {
+            studio.stickers.map((s) => (
+              <li>
+                <img src={`/media/sticker-${s}.webp`} alt={`Animated sticker: ${s}`} width="224" height="224" loading="lazy" />
+              </li>
+            ))
+          }
+        </ul>
+        <ul class="pages">
+          <li><Image src={bookCover} alt="Storybook cover: Sara’s Red Raincoat" width={280} /></li>
+          <li><Image src={bookPage} alt="Storybook page with the child drawn into the scene" width={280} /></li>
+        </ul>
+      </div>
+    </Fragment>
+  </Product>
+
+  <Product product={jyotish} icon={jyotishIcon} flip>
+    <ChatDemo
+      slot="demo"
+      name="Tara"
+      icon={jyotishIcon}
+      messages={jyotishChat}
+      caption="The live English onboarding script. Tara’s lines are the product’s own copy; Meera is a made-up user."
+    />
+  </Product>
+</section>
+
+<style>
+  .traction {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+    gap: 1px;
+    margin: 0;
+    background: var(--ink);
+    border: 1.5px solid var(--ink);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .traction div {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.3rem;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    background: var(--hi);
+  }
+
+  .traction dd {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    font-weight: 800;
+    font-stretch: 76%;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+
+  .traction dt {
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+
+  .traction__note {
+    margin-top: 0.7rem;
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .video {
+    display: grid;
+    gap: 0.9rem;
+    justify-items: center;
+  }
+
+  .video video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: var(--ink);
+  }
+
+  .video figcaption {
+    max-width: 20rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+
+  .outputs {
+    display: grid;
+    gap: 0.75rem;
+    width: min(100%, 20rem);
+  }
+
+  .stickers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4rem;
+  }
+
+  .stickers img {
+    width: 100%;
+  }
+
+  .pages {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .pages img {
+    width: 100%;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+  }
+</style>

@@ -1,0 +1,74 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  name: string;
+  icon: ImageMetadata;
+  status?: string;
+}
+
+const { name, icon, status = 'online' } = Astro.props;
+---
+
+<div class="phone">
+  <div class="phone__bar">
+    <Image src={icon} alt="" width={64} height={64} />
+    <div>
+      <strong>{name}</strong>
+      <span>{status}</span>
+    </div>
+  </div>
+  <div class="phone__body">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .phone {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    width: min(100%, 20rem);
+    aspect-ratio: 9 / 17.5;
+    border: 8px solid var(--ink);
+    border-radius: 2.25rem;
+    background: var(--wa-wall);
+    overflow: hidden;
+  }
+
+  .phone__bar {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 0.9rem;
+    background: var(--wa-green);
+    color: #fff;
+  }
+
+  .phone__bar img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #fff;
+  }
+
+  .phone__bar div {
+    display: grid;
+    line-height: 1.15;
+  }
+
+  .phone__bar strong {
+    font-size: 0.9rem;
+  }
+
+  .phone__bar span {
+    font-size: 0.7rem;
+    opacity: 0.85;
+  }
+
+  .phone__body {
+    position: relative;
+    min-height: 0;
+    overflow: hidden;
+  }
+</style>

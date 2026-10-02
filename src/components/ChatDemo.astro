@@ -1,0 +1,208 @@
+---
+import Icon from './Icon.astro';
+import Phone from './Phone.astro';
+import type { ChatMessage } from '../data/products';
+
+interface Props {
+  name: string;
+  icon: ImageMetadata;
+  messages: ChatMessage[];
+  caption: string;
+}
+
+const { name, icon, messages, caption } = Astro.props;
+---
+
+<figure class="chat" data-chat>
+  <Phone name={name} icon={icon}>
+    <ol class="chat__log" data-chat-log tabindex="0" aria-label={`${name} conversation`}>
+      {
+        messages.map((m) => (
+          <li class:list={['msg', `msg--${m.from}`, m.kind && `msg--${m.kind}`]} data-msg={m.from}>
+            {m.kind === 'chart' && (
+              <svg class="kundli" viewBox="0 0 100 100" aria-hidden="true">
+                <rect x="2" y="2" width="96" height="96" />
+                <path d="M2 2 98 98M98 2 2 98M50 2 98 50 50 98 2 50Z" />
+              </svg>
+            )}
+            {m.kind === 'qr' && <div class="qr" aria-hidden="true">UPI QR</div>}
+            <p>{m.text}</p>
+            {m.buttons && (
+              <div class="msg__buttons" aria-hidden="true">
+                {m.buttons.map((b) => (
+                  <span>{b}</span>
+                ))}
+              </div>
+            )}
+          </li>
+        ))
+      }
+      <li class="msg msg--bot msg--typing" data-typing hidden aria-hidden="true">
+        <span></span><span></span><span></span>
+      </li>
+    </ol>
+  </Phone>
+  <figcaption>
+    <span>{caption}</span>
+    <button class="btn btn--small" type="button" data-chat-replay>
+      <Icon name="rotate" />Replay
+    </button>
+  </figcaption>
+</figure>
+
+<style>
+  .chat {
+    display: grid;
+    gap: 0.9rem;
+    justify-items: center;
+  }
+
+  figcaption {
+    display: grid;
+    gap: 0.6rem;
+    justify-items: center;
+    max-width: 20rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+
+  .chat__log {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.8rem 0.6rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+
+  .msg {
+    max-width: 86%;
+    padding: 0.45rem 0.65rem;
+    border-radius: 0.6rem;
+    background: #fff;
+    color: #111b21;
+    font-size: 0.82rem;
+    line-height: 1.35;
+    box-shadow: 0 1px 0.5px rgb(11 20 26 / 0.13);
+  }
+
+  .msg p {
+    white-space: pre-line;
+  }
+
+  .msg--bot {
+    align-self: flex-start;
+    border-top-left-radius: 0;
+  }
+
+  .msg--user {
+    align-self: flex-end;
+    border-top-right-radius: 0;
+    background: var(--wa-bubble);
+  }
+
+  .msg--note {
+    align-self: center;
+    max-width: 92%;
+    background: #fff8d6;
+    border: 1px dashed #b89b1c;
+    border-radius: 0.5rem;
+    box-shadow: none;
+    font-size: 0.74rem;
+    text-align: center;
+  }
+
+  .msg__buttons {
+    display: grid;
+    gap: 0.25rem;
+    margin-top: 0.45rem;
+  }
+
+  .msg__buttons span {
+    padding: 0.35rem;
+    border-top: 1px solid #e6e6e6;
+    color: #027eb5;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .kundli {
+    width: 9.5rem;
+    margin-bottom: 0.4rem;
+    background: #fffaf0;
+    border-radius: 0.3rem;
+  }
+
+  .kundli rect,
+  .kundli path {
+    fill: none;
+    stroke: #8a4b12;
+    stroke-width: 1.4;
+  }
+
+  .qr {
+    display: grid;
+    place-items: center;
+    width: 9.5rem;
+    aspect-ratio: 1;
+    margin-bottom: 0.4rem;
+    border: 2px dashed #9aa5a1;
+    border-radius: 0.3rem;
+    color: #54656f;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+  }
+
+  .msg--typing {
+    display: flex;
+    gap: 0.25rem;
+    padding: 0.65rem 0.7rem;
+  }
+
+  .msg--typing[hidden] {
+    display: none;
+  }
+
+  .msg--typing span {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: #8696a0;
+    animation: blink 1s infinite ease-in-out;
+  }
+
+  .msg--typing span:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  .msg--typing span:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  @keyframes blink {
+    0%,
+    60%,
+    100% {
+      opacity: 0.3;
+    }
+    30% {
+      opacity: 1;
+    }
+  }
+
+  /* While a replay is running, messages not yet "sent" are removed from flow. */
+  .msg[data-pending] {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-chat-replay] {
+      display: none;
+    }
+  }
+</style>

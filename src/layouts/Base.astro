@@ -1,0 +1,70 @@
+---
+import '@fontsource-variable/bricolage-grotesque/standard.css';
+import '@fontsource-variable/hanken-grotesk';
+import '@fontsource-variable/martian-mono';
+import '../styles/global.css';
+import { site } from '../data/site';
+
+const ogImage = new URL('/og.jpg', site.url).href;
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: site.role,
+  url: site.url,
+  email: `mailto:${site.email}`,
+  address: { '@type': 'PostalAddress', addressLocality: 'Bengaluru', addressCountry: 'IN' },
+  alumniOf: 'Indian Institute of Management Calcutta',
+  sameAs: [site.linkedin, site.github],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{site.title}</title>
+    <meta name="description" content={site.description} />
+    <link rel="canonical" href={site.url} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#eef1f6" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={site.title} />
+    <meta property="og:description" content={site.description} />
+    <meta property="og:url" content={site.url} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(person)} />
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <slot />
+    <script>
+      import '../scripts/site.ts';
+    </script>
+  </body>
+</html>
+
+<style>
+  .skip {
+    position: absolute;
+    left: 0.5rem;
+    top: -4rem;
+    z-index: 30;
+    padding: 0.6rem 0.9rem;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: var(--radius);
+  }
+
+  .skip:focus {
+    top: 0.5rem;
+  }
+</style>

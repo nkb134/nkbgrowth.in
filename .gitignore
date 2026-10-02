@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+
+# Source material: holds a phone number and unpublished notes
+portfolio-data.md
+Passport Photo.jpg
+
+# Local tooling
+.claude/

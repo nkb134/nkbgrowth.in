@@ -1,0 +1,136 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+---
+
+<footer class="contact" id="contact">
+  <div class="wrap contact__inner">
+    <div data-reveal>
+      <p class="label">Contact</p>
+      <h2>
+        Hiring for growth, or building something in consumer AI?
+        <span class="hi">Write to me.</span>
+      </h2>
+    </div>
+
+    <ul class="contact__links" data-reveal>
+      <li>
+        <a href={`mailto:${site.email}`}>
+          <Icon name="mail" />
+          <span>
+            <small>Email</small>
+            {site.email}
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href={site.linkedin} rel="noopener">
+          <Icon name="linkedin" />
+          <span>
+            <small>LinkedIn</small>
+            linkedin.com/in/nissar-behera
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href={site.github} rel="noopener">
+          <Icon name="github" />
+          <span>
+            <small>GitHub</small>
+            github.com/nkb134
+          </span>
+        </a>
+      </li>
+    </ul>
+
+    <p class="contact__foot label">
+      {site.name} · {site.location} · {site.relocation}
+    </p>
+  </div>
+</footer>
+
+<style>
+  .contact {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .contact__inner {
+    display: grid;
+    gap: clamp(2rem, 5vw, 3.5rem);
+    padding-block: var(--section) clamp(2rem, 4vw, 3rem);
+  }
+
+  .label {
+    color: color-mix(in srgb, var(--paper) 70%, transparent);
+  }
+
+  h2 {
+    margin-top: 0.75rem;
+    max-width: 18ch;
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    font-weight: 800;
+    font-stretch: 78%;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  /* Ink text on ink ground: the stroke must always be drawn, so no swipe-in here. */
+  h2 .hi {
+    color: var(--ink);
+    background-size: 100% 64% !important;
+    transition: none !important;
+  }
+
+  .contact__links {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid color-mix(in srgb, var(--paper) 30%, transparent);
+  }
+
+  .contact__links a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 0.25rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--paper) 30%, transparent);
+    font-size: var(--step-1);
+    font-weight: 600;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    transition:
+      background-color 0.15s,
+      color 0.15s,
+      padding 0.15s;
+  }
+
+  .contact__links a:hover {
+    padding-inline: 1rem;
+    background: var(--hi);
+    color: var(--ink);
+  }
+
+  .contact__links span:not(.icon) {
+    display: grid;
+    line-height: 1.25;
+  }
+
+  .contact__links small {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .contact :global(:focus-visible) {
+    outline-color: var(--hi);
+  }
+
+  .contact__foot {
+    padding-top: 0.5rem;
+  }
+</style>

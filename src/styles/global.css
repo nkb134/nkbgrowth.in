@@ -1,0 +1,236 @@
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Layout */
+.wrap {
+  width: min(100% - 2 * var(--gutter), var(--wrap));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--section);
+}
+
+.section-head {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+  max-width: 46rem;
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  font-weight: 800;
+  font-stretch: 78%;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.section-head p:not(.label) {
+  color: var(--ink-soft);
+  font-size: var(--step-1);
+  line-height: 1.4;
+  max-width: var(--measure);
+}
+
+/* Small mono label, used for metadata only */
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* Highlighter stroke: swipes in when its reveal parent enters view */
+.hi {
+  background-image: linear-gradient(var(--hi), var(--hi));
+  background-repeat: no-repeat;
+  background-position: 0 68%;
+  background-size: 100% 64%;
+  padding-inline: 0.1em;
+  margin-inline: -0.04em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Buttons and links that act */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.7em 1.1em;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    color 0.15s,
+    transform 0.15s;
+}
+
+.btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--solid {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn--solid:hover {
+  background: var(--hi);
+  color: var(--ink);
+}
+
+.btn--small {
+  padding: 0.5em 0.8em;
+  font-size: 0.9rem;
+}
+
+.icon {
+  display: inline-flex;
+  flex: none;
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chips li {
+  padding: 0.3em 0.6em;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--card);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Scroll reveal. Content is visible by default; JS opts in by adding .js to <html>. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+
+  .js [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  .js [data-reveal] .hi {
+    background-size: 0% 64%;
+    transition: background-size 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.25s;
+  }
+
+  .js [data-reveal].is-in .hi {
+    background-size: 100% 64%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

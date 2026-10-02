@@ -1,0 +1,164 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import Slope from './Slope.astro';
+import portrait from '../assets/portrait.jpg';
+import { results, site } from '../data/site';
+---
+
+<section class="hero wrap" id="top">
+  <div class="hero__copy">
+    <p class="label">{site.name} · {site.role}</p>
+    <h1>
+      I <span class="hi">grow</span> consumer products.<br />
+      And I <span class="hi">build</span> my own.
+    </h1>
+    <p class="hero__lede">
+      12+ years across consumer fintech, crypto and consumer AI in India and Southeast Asia. I rebuilt
+      referral into CoinDCX’s cheapest acquisition channel, took its crypto futures business from zero to
+      $72M ARR as P&amp;L owner, and now build and monetise generative-AI products on WhatsApp.
+    </p>
+    <div class="hero__actions">
+      <a class="btn btn--solid" href={`mailto:${site.email}`}><Icon name="mail" />Email me</a>
+      <a class="btn" href={site.linkedin} rel="noopener"><Icon name="linkedin" />LinkedIn</a>
+      <a class="btn" href={site.github} rel="noopener"><Icon name="github" />GitHub</a>
+    </div>
+  </div>
+
+  <figure class="hero__portrait">
+    <Image
+      src={portrait}
+      alt="Portrait of Nissar Behera"
+      widths={[320, 480, 720]}
+      sizes="(min-width: 60rem) 22rem, 12rem"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <figcaption class="label">
+      <Icon name="map-pin" />
+      {site.location} · {site.relocation}
+    </figcaption>
+  </figure>
+</section>
+
+<section class="results wrap" id="results" aria-labelledby="results-title">
+  <h2 class="label" id="results-title">Before and after: six numbers I was responsible for</h2>
+  <div class="results__grid">
+    {results.map((r) => <Slope {...r} />)}
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    padding-block: clamp(2.5rem, 7vw, 6rem) clamp(2rem, 5vw, 4rem);
+    align-items: end;
+  }
+
+  .hero__copy {
+    display: grid;
+    gap: clamp(1rem, 2vw, 1.75rem);
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: var(--step-4);
+    font-weight: 800;
+    font-stretch: 75%;
+    line-height: 0.92;
+    letter-spacing: -0.025em;
+  }
+
+  /* The hero is visible at once; only the highlighter strokes animate in. */
+  @media (prefers-reduced-motion: no-preference) {
+    h1 .hi {
+      animation: swipe 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.35s both;
+    }
+
+    h1 .hi + br + .hi,
+    h1 .hi:last-of-type {
+      animation-delay: 0.75s;
+    }
+
+    @keyframes swipe {
+      from {
+        background-size: 0% 64%;
+      }
+      to {
+        background-size: 100% 64%;
+      }
+    }
+  }
+
+  .hero__lede {
+    max-width: 58ch;
+    font-size: var(--step-1);
+    line-height: 1.4;
+    color: var(--ink-soft);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .hero__portrait {
+    width: 12rem;
+    border: 1.5px solid var(--ink);
+    border-radius: var(--radius);
+    background: var(--card);
+    overflow: hidden;
+  }
+
+  .hero__portrait img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .hero__portrait figcaption {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0.6rem 0.7rem;
+    border-top: 1.5px solid var(--ink);
+    line-height: 1.3;
+  }
+
+  .results {
+    padding-bottom: var(--section);
+  }
+
+  .results > h2 {
+    padding-bottom: 0.9rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .results__grid {
+    display: grid;
+    gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  }
+
+  @media (min-width: 34rem) {
+    .results__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 60rem) {
+    .hero {
+      grid-template-columns: minmax(0, 1fr) 22rem;
+    }
+
+    .hero__portrait {
+      width: 100%;
+    }
+
+    .results__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
