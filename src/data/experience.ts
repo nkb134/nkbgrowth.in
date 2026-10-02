@@ -25,6 +25,7 @@ export const experience: Role[] = [
   {
     title: 'Founder & CPO',
     company: 'RinnWealth',
+    logo: 'rinnwealth',
     place: 'Bengaluru',
     dates: 'Mar 2026 to Sep 2026',
     points: [

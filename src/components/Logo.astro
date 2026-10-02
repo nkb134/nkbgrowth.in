@@ -1,7 +1,7 @@
 ---
 import { logos, type LogoName } from '../data/logos';
 
-// Drawn in one ink colour through a CSS mask so six brand palettes sit together.
+// Each logo keeps its own brand colours; `scale` evens out their optical size.
 interface Props {
   name: LogoName;
   /** Height in rem of a scale-1 logo. */
@@ -12,25 +12,20 @@ const { name, size = 1.5 } = Astro.props;
 const logo = logos[name];
 ---
 
-<span
+<img
   class="logo"
-  role="img"
-  aria-label={logo.label}
-  style={`--logo:url("${logo.url}");height:${(size * logo.scale).toFixed(2)}rem;aspect-ratio:${logo.ratio}`}
-></span>
+  src={logo.url}
+  alt={logo.label}
+  loading="lazy"
+  decoding="async"
+  style={`height:${(size * logo.scale).toFixed(2)}rem;aspect-ratio:${logo.ratio}`}
+/>
 
 <style>
   .logo {
     display: block;
     flex: none;
-    background: currentColor;
-    -webkit-mask: var(--logo) center / contain no-repeat;
-    mask: var(--logo) center / contain no-repeat;
-  }
-
-  @media (forced-colors: active) {
-    .logo {
-      background: CanvasText;
-    }
+    width: auto;
+    max-width: none;
   }
 </style>

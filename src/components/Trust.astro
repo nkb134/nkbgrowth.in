@@ -1,17 +1,15 @@
 ---
 import Icon from './Icon.astro';
 import Logo from './Logo.astro';
-import { logos, type LogoName } from '../data/logos';
+import { employers } from '../data/logos';
 import { credentials } from '../data/site';
-
-const order = Object.keys(logos) as LogoName[];
 ---
 
 <section class="trust wrap" aria-labelledby="trust-title">
   <h2 class="label" id="trust-title">Where I’ve worked</h2>
   <ul class="trust__logos">
     {
-      order.map((name) => (
+      employers.map((name) => (
         <li>
           <Logo name={name} />
         </li>

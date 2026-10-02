@@ -6,6 +6,7 @@ dist/
 # Source material: holds a phone number and unpublished notes
 portfolio-data.md
 Passport Photo.jpg
+image.png
 
 # Local tooling
 .claude/
