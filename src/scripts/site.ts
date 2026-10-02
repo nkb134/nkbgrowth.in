@@ -81,3 +81,21 @@ if (!reduceMotion) {
   );
   document.querySelectorAll<HTMLVideoElement>('video[data-autoplay]').forEach((v) => player.observe(v));
 }
+
+/* Sound toggle: autoplay has to start muted, so sound is one tap away. */
+document.querySelectorAll<HTMLButtonElement>('[data-sound]').forEach((button) => {
+  const video = button.parentElement?.querySelector('video');
+  if (!video) return;
+  const sync = () => {
+    button.textContent = video.muted ? 'Turn sound on' : 'Mute';
+    button.setAttribute('aria-pressed', String(!video.muted));
+  };
+  button.addEventListener('click', () => {
+    video.muted = !video.muted;
+    if (!video.muted) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    }
+  });
+  video.addEventListener('volumechange', sync);
+});

@@ -23,7 +23,7 @@ const host = new URL(product.site).hostname;
 ---
 
 <article class:list={['product', flip && 'product--flip']}>
-  <div class="product__text" data-reveal>
+  <div class="product__intro" data-reveal>
     <header class="product__head">
       <Image src={icon} alt="" width={128} height={128} class="product__icon" />
       <div>
@@ -43,7 +43,13 @@ const host = new URL(product.site).hostname;
         <Icon name="globe" />{host}
       </a>
     </div>
+  </div>
 
+  <div class="product__demo">
+    <slot name="demo" />
+  </div>
+
+  <div class="product__details" data-reveal>
     <div class="product__block">
       <h4 class="label">How a sale happens</h4>
       <ol class="steps">
@@ -65,10 +71,6 @@ const host = new URL(product.site).hostname;
       </ul>
     </div>
   </div>
-
-  <div class="product__demo" data-reveal>
-    <slot name="demo" />
-  </div>
 </article>
 
 <style>
@@ -79,7 +81,8 @@ const host = new URL(product.site).hostname;
     border-top: 1.5px solid var(--ink);
   }
 
-  .product__text {
+  .product__intro,
+  .product__details {
     display: grid;
     gap: 1.25rem;
     align-content: start;
@@ -186,17 +189,33 @@ const host = new URL(product.site).hostname;
     align-content: start;
   }
 
+  /* Small screens read intro, demo, details. Wide screens put the demo beside both. */
   @media (min-width: 60rem) {
     .product {
       grid-template-columns: minmax(0, 1fr) 24rem;
+      grid-template-areas:
+        'intro demo'
+        'details demo';
+      row-gap: 1.25rem;
     }
 
     .product--flip {
       grid-template-columns: 24rem minmax(0, 1fr);
+      grid-template-areas:
+        'demo intro'
+        'demo details';
     }
 
-    .product--flip .product__demo {
-      order: -1;
+    .product__intro {
+      grid-area: intro;
+    }
+
+    .product__demo {
+      grid-area: demo;
+    }
+
+    .product__details {
+      grid-area: details;
     }
   }
 </style>

@@ -46,16 +46,17 @@ const { rinnwealth, arena } = ventures;
             muted
             loop
             playsinline
-            preload="none"
+            preload="metadata"
             poster={viralPoster.src}
             data-autoplay
             aria-label="Make me viral demo: a reel link and one selfie go to Tara, and the reel comes back with the sender in it"
           >
             <source src="/media/tara-make-me-viral.mp4" type="video/mp4" />
           </video>
+          <button class="sound" type="button" data-sound aria-pressed="false">Turn sound on</button>
         </Phone>
         <figcaption>
-          A reel link and one selfie went in. The second half is the reel that came back. No sound here.
+          A reel link and one selfie went in. The second half is the reel that came back.
         </figcaption>
       </figure>
 
@@ -255,6 +256,21 @@ const { rinnwealth, arena } = ventures;
     height: 100%;
     object-fit: cover;
     background: var(--ink);
+  }
+
+  .sound {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    padding: 0.45em 0.8em;
+    border: 0;
+    border-radius: 999px;
+    background: var(--hi);
+    color: var(--ink);
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
   }
 
   .video figcaption {
