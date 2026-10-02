@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
+import Trust from './Trust.astro';
 import portrait from '../assets/portrait.jpg';
 import { site } from '../data/site';
 import { summary } from '../data/work';
@@ -40,6 +41,8 @@ import { summary } from '../data/work';
   </figure>
 </section>
 
+<Trust />
+
 <section class="both wrap" aria-label="Summary">
   {
     [summary.grow, summary.build].map((side, i) => (
@@ -66,7 +69,7 @@ import { summary } from '../data/work';
   .hero {
     display: grid;
     gap: clamp(1.5rem, 4vw, 3.5rem);
-    padding-block: clamp(2.5rem, 7vw, 6rem) clamp(2rem, 5vw, 4rem);
+    padding-block: clamp(2.5rem, 7vw, 6rem) clamp(1.75rem, 4vw, 3rem);
     align-items: end;
   }
 

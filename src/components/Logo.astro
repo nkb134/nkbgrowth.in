@@ -1,0 +1,36 @@
+---
+import { logos, type LogoName } from '../data/logos';
+
+// Drawn in one ink colour through a CSS mask so six brand palettes sit together.
+interface Props {
+  name: LogoName;
+  /** Height in rem of a scale-1 logo. */
+  size?: number;
+}
+
+const { name, size = 1.5 } = Astro.props;
+const logo = logos[name];
+---
+
+<span
+  class="logo"
+  role="img"
+  aria-label={logo.label}
+  style={`--logo:url("${logo.url}");height:${(size * logo.scale).toFixed(2)}rem;aspect-ratio:${logo.ratio}`}
+></span>
+
+<style>
+  .logo {
+    display: block;
+    flex: none;
+    background: currentColor;
+    -webkit-mask: var(--logo) center / contain no-repeat;
+    mask: var(--logo) center / contain no-repeat;
+  }
+
+  @media (forced-colors: active) {
+    .logo {
+      background: CanvasText;
+    }
+  }
+</style>

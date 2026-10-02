@@ -1,4 +1,5 @@
 ---
+import Logo from './Logo.astro';
 import { experience } from '../data/experience';
 import { education, skills } from '../data/site';
 ---
@@ -31,6 +32,11 @@ import { education, skills } from '../data/site';
                 </a>
               )}
             </div>
+            {role.logo && (
+              <div class="role__logo">
+                <Logo name={role.logo} size={1.15} />
+              </div>
+            )}
           </li>
         ))
       }
@@ -118,6 +124,10 @@ import { education, skills } from '../data/site';
     color: var(--ink-soft);
   }
 
+  .role__logo {
+    color: var(--ink-soft);
+  }
+
   .role__more {
     justify-self: start;
     font-size: 0.9rem;
@@ -167,7 +177,12 @@ import { education, skills } from '../data/site';
 
   @media (min-width: 52rem) {
     .role {
-      grid-template-columns: 13rem minmax(0, 1fr);
+      grid-template-columns: 13rem minmax(0, 1fr) auto;
+    }
+
+    .role__logo {
+      grid-column: 3;
+      padding-top: 0.3rem;
     }
 
     .role__dates {

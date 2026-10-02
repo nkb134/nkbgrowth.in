@@ -1,11 +1,15 @@
 ---
 import { siGithub, siWhatsapp } from 'simple-icons';
 import arrowDown from 'lucide-static/icons/arrow-down.svg?raw';
+import building from 'lucide-static/icons/building-2.svg?raw';
+import calendar from 'lucide-static/icons/calendar-days.svg?raw';
 import globe from 'lucide-static/icons/globe.svg?raw';
+import graduationCap from 'lucide-static/icons/graduation-cap.svg?raw';
+import handshake from 'lucide-static/icons/handshake.svg?raw';
 import mail from 'lucide-static/icons/mail.svg?raw';
 import mapPin from 'lucide-static/icons/map-pin.svg?raw';
-import play from 'lucide-static/icons/play.svg?raw';
 import rotate from 'lucide-static/icons/rotate-ccw.svg?raw';
+import wallet from 'lucide-static/icons/wallet.svg?raw';
 
 interface Props {
   name: keyof typeof icons;
@@ -20,11 +24,15 @@ const linkedin =
 
 const icons = {
   'arrow-down': arrowDown,
+  building,
+  calendar,
   globe,
+  'graduation-cap': graduationCap,
+  handshake,
   mail,
   'map-pin': mapPin,
-  play,
   rotate,
+  wallet,
   github: brand(siGithub.path),
   whatsapp: brand(siWhatsapp.path),
   linkedin: brand(linkedin),

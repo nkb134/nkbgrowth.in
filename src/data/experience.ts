@@ -1,3 +1,5 @@
+import type { LogoName } from './logos';
+
 /** Full work history, newest first. Roles covered in detail above link back to their section. */
 export interface Role {
   title: string;
@@ -6,6 +8,7 @@ export interface Role {
   dates: string;
   points: string[];
   href?: string;
+  logo?: LogoName;
 }
 
 export const experience: Role[] = [
@@ -32,6 +35,7 @@ export const experience: Role[] = [
   {
     title: 'Head of Growth',
     company: 'Ajaib',
+    logo: 'ajaib',
     place: 'Remote',
     dates: 'Nov 2025 to Apr 2026',
     points: [
@@ -42,6 +46,7 @@ export const experience: Role[] = [
   {
     title: 'Head of Growth (AVP)',
     company: 'CoinDCX',
+    logo: 'coindcx',
     place: 'Bengaluru',
     dates: 'Jul 2022 to Oct 2025',
     points: [
@@ -52,6 +57,7 @@ export const experience: Role[] = [
   {
     title: 'Associate Managing Consultant',
     company: 'Mastercard Data & Services',
+    logo: 'mastercard',
     place: 'Gurgaon',
     dates: 'Nov 2019 to Jul 2022',
     points: [
@@ -62,6 +68,7 @@ export const experience: Role[] = [
   {
     title: 'Senior Consultant',
     company: 'Deloitte Touche Tohmatsu LLP',
+    logo: 'deloitte',
     place: 'Mumbai',
     dates: 'Dec 2018 to Nov 2019',
     points: [
@@ -71,6 +78,7 @@ export const experience: Role[] = [
   {
     title: 'Senior Consultant',
     company: 'PricewaterhouseCoopers Pvt Ltd',
+    logo: 'pwc',
     place: 'Mumbai',
     dates: 'Jul 2017 to Dec 2018',
     points: [
@@ -80,6 +88,7 @@ export const experience: Role[] = [
   {
     title: 'Senior Systems Engineer',
     company: 'Infosys Limited',
+    logo: 'infosys',
     place: 'Chennai',
     dates: 'Aug 2011 to Jun 2015',
     points: ['Built automation that saved a Fortune 500 F&B client $172K a year.'],

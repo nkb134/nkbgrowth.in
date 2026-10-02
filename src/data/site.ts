@@ -20,6 +20,15 @@ export const nav = [
   { href: '#contact', label: 'Contact' },
 ];
 
+/** Checkable facts, shown under the employer logos. */
+export const credentials = [
+  { icon: 'graduation-cap', title: 'MBA, IIM Calcutta', detail: 'Class of 2017' },
+  { icon: 'calendar', title: '12+ years', detail: 'in fintech, crypto and consumer AI' },
+  { icon: 'wallet', title: '$10M annual budget', detail: 'and a 9-person team at CoinDCX' },
+  { icon: 'handshake', title: 'Axis Bank and Setu', detail: 'signed as RinnWealth launch partners' },
+  { icon: 'building', title: 'NKB Growth Consultancy Pvt Ltd', detail: 'the company behind both Tara products' },
+] as const;
+
 export const skills = [
   {
     group: 'Product-led growth',

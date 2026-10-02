@@ -82,7 +82,7 @@ export const jyotish = {
   ],
 };
 
-/** Smaller things, shown as cards under the two products. */
+/** Shown as a card under the two products. */
 export const ventures = {
   rinnwealth: {
     name: 'RinnWealth',
@@ -93,18 +93,6 @@ export const ventures = {
       'Axis Bank and Setu signed on as launch partners. I also led the NPCI approval path, in a category that had no playbook.',
     ],
     stack: ['UPI Autopay', 'BBPS', 'NPCI', 'Axis Bank', 'Setu'],
-  },
-  arena: {
-    name: 'Arena',
-    role: 'Side project',
-    line: 'Two language models play chess on a clock that really runs.',
-    body: [
-      'Each model is told how much time it has left and gets a token budget to match, so the only way to play faster is to think less.',
-      'Stockfish scores every move, and recorded matches replay at their real timings.',
-    ],
-    stack: ['Python', 'Stockfish', 'Gemini on Vertex', 'TypeScript'],
-    live: 'https://nkb134.github.io/ai-battle-royale/',
-    repo: 'https://github.com/nkb134/ai-battle-royale',
   },
 };
 

@@ -8,11 +8,9 @@ import jyotishIcon from '../assets/icons/tara-jyotish.png';
 import viralPoster from '../assets/tara/viral-poster.jpg';
 import bookCover from '../assets/tara/book-cover.webp';
 import bookPage from '../assets/tara/book-p05.webp';
-import Icon from './Icon.astro';
-import arenaShot from '../assets/shots/arena.jpg';
 import { jyotish, jyotishChat, studio, traction, ventures } from '../data/products';
 
-const { rinnwealth, arena } = ventures;
+const { rinnwealth } = ventures;
 ---
 
 <section class="section wrap" id="products" aria-labelledby="products-title">
@@ -91,33 +89,16 @@ const { rinnwealth, arena } = ventures;
 
   <div class="ventures" id="ventures">
     <article class="venture" data-reveal>
-      <header>
-        <h3>{rinnwealth.name}</h3>
+      <div class="venture__head">
         <p class="label">{rinnwealth.role}</p>
-      </header>
-      <p class="venture__line">{rinnwealth.line}</p>
-      {rinnwealth.body.map((b) => <p class="venture__body">{b}</p>)}
-      <ul class="chips">
-        {rinnwealth.stack.map((s) => <li>{s}</li>)}
-      </ul>
-    </article>
-
-    <article class="venture venture--media" data-reveal>
-      <Image src={arenaShot} alt="Arena: a chess board mid-game with a move list and two clocks" width={640} loading="lazy" />
-      <div>
-        <header>
-          <h3>{arena.name}</h3>
-          <p class="label">{arena.role}</p>
-        </header>
-        <p class="venture__line">{arena.line}</p>
-        {arena.body.map((b) => <p class="venture__body">{b}</p>)}
+        <h3>{rinnwealth.name}</h3>
+        <p class="venture__line">{rinnwealth.line}</p>
+      </div>
+      <div class="venture__detail">
+        {rinnwealth.body.map((b) => <p class="venture__body">{b}</p>)}
         <ul class="chips">
-          {arena.stack.map((s) => <li>{s}</li>)}
+          {rinnwealth.stack.map((s) => <li>{s}</li>)}
         </ul>
-        <div class="venture__links">
-          <a class="btn btn--solid btn--small" href={arena.live} rel="noopener"><Icon name="play" />Watch a match</a>
-          <a class="btn btn--small" href={arena.repo} rel="noopener"><Icon name="github" />Code</a>
-        </div>
       </div>
     </article>
   </div>
@@ -164,50 +145,25 @@ const { rinnwealth, arena } = ventures;
   }
 
   .ventures {
-    display: grid;
-    gap: clamp(1rem, 2vw, 1.5rem);
     padding-top: clamp(2rem, 5vw, 3.5rem);
     border-top: 1.5px solid var(--ink);
     scroll-margin-top: 4.5rem;
-    align-items: start;
-  }
-
-  .venture,
-  .venture--media > div {
-    display: grid;
-    gap: 0.8rem;
-    align-content: start;
   }
 
   .venture {
+    display: grid;
+    gap: 0.8rem 3rem;
+    padding: clamp(1.1rem, 2vw, 1.6rem);
     background: var(--card);
     border: 1px solid var(--rule);
     border-radius: var(--radius);
-    padding: clamp(1.1rem, 2vw, 1.6rem);
   }
 
-  .venture--media {
-    padding: 0;
-    overflow: hidden;
-  }
-
-  .venture--media > div {
-    padding: clamp(1.1rem, 2vw, 1.6rem);
-  }
-
-  .venture--media img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    object-position: 20% 35%;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .venture header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.3rem 1rem;
+  .venture__head,
+  .venture__detail {
+    display: grid;
+    gap: 0.8rem;
+    align-content: start;
   }
 
   .venture h3 {
@@ -230,16 +186,9 @@ const { rinnwealth, arena } = ventures;
     color: var(--ink-soft);
   }
 
-  .venture__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-top: 0.3rem;
-  }
-
   @media (min-width: 60rem) {
-    .ventures {
-      grid-template-columns: 1fr 1fr;
+    .venture {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
     }
   }
 
