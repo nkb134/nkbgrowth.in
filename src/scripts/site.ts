@@ -66,3 +66,18 @@ function setupChat(root: HTMLElement) {
 if (!reduceMotion) {
   document.querySelectorAll<HTMLElement>('[data-chat]').forEach(setupChat);
 }
+
+/* Demo videos marked data-autoplay play (muted) while on screen and pause when they leave. */
+if (!reduceMotion) {
+  const player = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      }
+    },
+    { threshold: 0.6 },
+  );
+  document.querySelectorAll<HTMLVideoElement>('video[data-autoplay]').forEach((v) => player.observe(v));
+}

@@ -15,17 +15,18 @@ export const traction = [
 export const studio = {
   name: 'Tara AI Studio',
   role: 'Founder · 2026 to present',
-  tagline: 'Send one photo, get stickers of your own face back.',
+  tagline: 'Send a reel and one photo. Get the reel back with you in it.',
   description:
-    'You send Tara a photo on WhatsApp and she makes a cartoon avatar of you for free. If you like it, you can buy ten animated stickers of that face, a storybook starring your child, or a retouched portrait. You pay by UPI without leaving the chat.',
+    'I call this part Make me viral. You copy the link to a trending Instagram reel and send it to Tara on WhatsApp with one photo. She sends the reel back with your face in it, doing the same moves. The same photo also gets you ten animated stickers, a storybook starring your child, or a retouched portrait, each paid for by UPI in the chat.',
   site: 'https://tara-ai.studio',
   whatsapp: 'https://tara-ai.studio/wa?t=sticker&l=en',
   steps: [
-    'You send a photo. Tara checks it, makes one free avatar, and you approve it or ask for a fix.',
+    'For stickers and books, you send a photo. Tara checks it, makes one free avatar, and you approve it or ask for a fix.',
     'One pay message arrives in the chat, with a UPI QR and a pay button.',
     'Once the payment lands, the job starts. The stickers or the book arrive in the same chat a few minutes later.',
   ],
   features: [
+    'Make me viral. Higgsfield Genjutsu redraws the reel around the photo you sent, and the result is upscaled before it goes back. The video here came from one selfie.',
     'Sticker packs. One avatar becomes a pose sheet, then ten two-second clips, each keyed into a WhatsApp sticker under 500 KB.',
     'Storybooks. There are four human-written books. The pipeline draws the child into pre-made pages and typesets a 14-page PDF, or cuts a video with narration, music and sound effects.',
     'Photo edits in four styles: natural glow, studio portrait, model photoshoot and cartoon.',
@@ -36,6 +37,7 @@ export const studio = {
     'Express',
     'PostgreSQL',
     'WhatsApp Cloud API',
+    'Higgsfield Genjutsu',
     'Gemini',
     'fal.ai',
     'Seedance',

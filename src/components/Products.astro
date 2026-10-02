@@ -5,7 +5,7 @@ import Phone from './Phone.astro';
 import Product from './Product.astro';
 import studioIcon from '../assets/icons/tara-studio.png';
 import jyotishIcon from '../assets/icons/tara-jyotish.png';
-import studioPoster from '../assets/tara/studio-poster.jpg';
+import viralPoster from '../assets/tara/viral-poster.jpg';
 import bookCover from '../assets/tara/book-cover.webp';
 import bookPage from '../assets/tara/book-p05.webp';
 import Icon from './Icon.astro';
@@ -40,22 +40,27 @@ const { rinnwealth, arena } = ventures;
   <Product product={studio} icon={studioIcon}>
     <Fragment slot="demo">
       <figure class="video">
-        <Phone name={studio.name} icon={studioIcon} status="product demo · 39 s">
+        <Phone name={studio.name} icon={studioIcon} status="Make me viral · 26 s">
           <video
             controls
+            muted
+            loop
             playsinline
             preload="none"
-            poster={studioPoster.src}
-            aria-label="Tara AI Studio product demo video"
+            poster={viralPoster.src}
+            data-autoplay
+            aria-label="Make me viral demo: a reel link and one selfie go to Tara, and the reel comes back with the sender in it"
           >
-            <source src="/media/tara-studio-demo.mp4" type="video/mp4" />
+            <source src="/media/tara-make-me-viral.mp4" type="video/mp4" />
           </video>
         </Phone>
-        <figcaption>New users get this video as Tara’s first message. It has sound.</figcaption>
+        <figcaption>
+          A reel link and one selfie went in. The second half is the reel that came back. No sound here.
+        </figcaption>
       </figure>
 
       <div class="outputs">
-        <p class="label">What it makes</p>
+        <p class="label">What else it makes</p>
         <ul class="stickers">
           {
             studio.stickers.map((s) => (
