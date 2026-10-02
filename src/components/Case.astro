@@ -1,0 +1,160 @@
+---
+import type { CaseStudy } from '../data/work';
+
+type Props = CaseStudy;
+
+const { built, body, metric, from, to, fromText, toText, note } = Astro.props;
+
+// Zero-based axis inside a 200x64 box: baseline at y=58, tallest value at y=8.
+const X1 = 10;
+const X2 = 190;
+const BASE = 58;
+const SPAN = 50;
+const y = (v: number) => +(BASE - (v / Math.max(from, to)) * SPAN).toFixed(2);
+const y1 = y(from);
+const y2 = y(to);
+---
+
+<article class="case" data-reveal>
+  <h4>{built}</h4>
+  <p class="case__body">{body}</p>
+
+  <div class="case__figure">
+    <p class="label">{metric}</p>
+    <p class="case__delta">
+      <span class="case__from">{fromText}</span>
+      <span class="case__to-word">to</span>
+      <span class="hi">{toText}</span>
+    </p>
+    <svg viewBox="0 0 200 64" preserveAspectRatio="xMinYMid meet" role="img" aria-label={`${metric}: ${fromText} to ${toText}`}>
+      <polygon class="case__area" points={`${X1},${y1} ${X2},${y2} ${X2},${BASE} ${X1},${BASE}`}></polygon>
+      <line class="case__base" x1={X1} y1={BASE} x2={X2} y2={BASE}></line>
+      <line class="case__line" x1={X1} y1={y1} x2={X2} y2={y2} pathLength="1"></line>
+      <circle class="case__dot" cx={X1} cy={y1} r="3.5"></circle>
+      <circle class="case__dot case__dot--end" cx={X2} cy={y2} r="3.5"></circle>
+    </svg>
+    <p class="case__note">{note}</p>
+  </div>
+</article>
+
+<style>
+  .case {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 0.6rem;
+    padding: clamp(1.1rem, 2vw, 1.5rem);
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+  }
+
+  h4 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    font-weight: 800;
+    font-stretch: 82%;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .case__body {
+    color: var(--ink-soft);
+    font-size: 0.97rem;
+    line-height: 1.45;
+  }
+
+  .case__figure {
+    display: grid;
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .case__delta {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3em;
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 1.4rem + 1.8vw, 2.75rem);
+    font-weight: 800;
+    font-stretch: 76%;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  .case__from {
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  .case__to-word {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    color: var(--ink-soft);
+  }
+
+  svg {
+    width: 100%;
+    max-height: 5.5rem;
+    overflow: visible;
+  }
+
+  .case__area {
+    fill: var(--hi);
+  }
+
+  .case__base {
+    stroke: var(--rule);
+    stroke-width: 1;
+  }
+
+  .case__line {
+    stroke: var(--ink);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+  }
+
+  .case__dot {
+    fill: var(--card);
+    stroke: var(--ink);
+    stroke-width: 2.5;
+  }
+
+  .case__dot--end {
+    fill: var(--ink);
+  }
+
+  .case__note {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .case__line {
+      stroke-dashoffset: 1;
+      transition: stroke-dashoffset 0.9s cubic-bezier(0.3, 0.7, 0.2, 1) 0.15s;
+    }
+
+    :global(.js) .case__area,
+    :global(.js) .case__dot--end {
+      opacity: 0;
+      transition: opacity 0.5s ease 0.8s;
+    }
+
+    :global(.js) .case.is-in .case__line {
+      stroke-dashoffset: 0;
+    }
+
+    :global(.js) .case.is-in .case__area,
+    :global(.js) .case.is-in .case__dot--end {
+      opacity: 1;
+    }
+  }
+</style>

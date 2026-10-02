@@ -66,23 +66,3 @@ function setupChat(root: HTMLElement) {
 if (!reduceMotion) {
   document.querySelectorAll<HTMLElement>('[data-chat]').forEach(setupChat);
 }
-
-/* Live demos: the site is only loaded into the dialog when someone asks for it. */
-const dialog = document.querySelector<HTMLDialogElement>('[data-demo-dialog]');
-const frame = dialog?.querySelector<HTMLIFrameElement>('[data-demo-frame]');
-const title = dialog?.querySelector<HTMLElement>('[data-demo-title]');
-
-if (dialog && frame && title) {
-  document.querySelectorAll<HTMLButtonElement>('[data-demo]').forEach((button) => {
-    button.addEventListener('click', () => {
-      title.textContent = button.dataset.demoName ?? 'Demo';
-      frame.src = button.dataset.demo!;
-      dialog.showModal();
-    });
-  });
-
-  dialog.addEventListener('close', () => frame.removeAttribute('src'));
-  dialog.addEventListener('click', (event) => {
-    if (event.target === dialog) dialog.close();
-  });
-}

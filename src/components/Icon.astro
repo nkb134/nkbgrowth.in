@@ -1,12 +1,11 @@
 ---
 import { siGithub, siWhatsapp } from 'simple-icons';
-import arrowUpRight from 'lucide-static/icons/arrow-up-right.svg?raw';
+import arrowDown from 'lucide-static/icons/arrow-down.svg?raw';
 import globe from 'lucide-static/icons/globe.svg?raw';
 import mail from 'lucide-static/icons/mail.svg?raw';
 import mapPin from 'lucide-static/icons/map-pin.svg?raw';
 import play from 'lucide-static/icons/play.svg?raw';
 import rotate from 'lucide-static/icons/rotate-ccw.svg?raw';
-import swords from 'lucide-static/icons/swords.svg?raw';
 
 interface Props {
   name: keyof typeof icons;
@@ -20,13 +19,12 @@ const linkedin =
   'M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.75 9.75h3.8v1.6h.05c.53-.95 1.83-1.95 3.76-1.95 4.02 0 4.64 2.5 4.64 5.75V21h-4v-5.2c0-1.24-.02-2.84-1.73-2.84-1.73 0-2 1.35-2 2.75V21h-4z';
 
 const icons = {
-  'arrow-up-right': arrowUpRight,
+  'arrow-down': arrowDown,
   globe,
   mail,
   'map-pin': mapPin,
   play,
   rotate,
-  swords,
   github: brand(siGithub.path),
   whatsapp: brand(siWhatsapp.path),
   linkedin: brand(linkedin),

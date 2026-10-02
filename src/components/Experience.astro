@@ -3,75 +3,81 @@ import { experience } from '../data/experience';
 import { education, skills } from '../data/site';
 ---
 
-<section class="section wrap" id="experience" aria-labelledby="experience-title">
-  <div class="section-head" data-reveal>
-    <p class="label">Experience</p>
-    <h2 id="experience-title">Engineer, consultant, growth lead, <span class="hi">founder</span></h2>
-  </div>
-
-  <ol class="roles">
-    {
-      experience.map((role) => (
-        <li class="role" data-reveal>
-          <p class="role__dates label">
-            {role.dates}
-            <span>{role.place}</span>
-          </p>
-          <div class="role__body">
-            <h3>
-              {role.title}, <span>{role.company}</span>
-            </h3>
-            {role.about && <p class="role__about">{role.about}</p>}
-            <ul>
-              {role.points.map((p) => (
-                <li>
-                  {p.lead && <strong>{p.lead}. </strong>}
-                  {p.text}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </li>
-      ))
-    }
-  </ol>
-
-  <div class="extras">
-    <div data-reveal>
-      <h3 class="label">What I work with</h3>
-      <dl class="skills">
-        {
-          skills.map((s) => (
-            <div>
-              <dt>{s.group}</dt>
-              <dd>{s.items}</dd>
-            </div>
-          ))
-        }
-      </dl>
+<section class="section history" id="history" aria-labelledby="history-title">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <p class="label">Work history</p>
+      <h2 id="history-title">Everywhere I’ve worked, <span class="hi">newest first</span></h2>
     </div>
-    <div data-reveal>
-      <h3 class="label">Education</h3>
-      <ul class="education">
-        {
-          education.map((e) => (
-            <li>
-              <strong>{e.degree}</strong>
-              <span>{e.school}</span>
-              <span class="label">{e.years}</span>
-            </li>
-          ))
-        }
-      </ul>
+
+    <ol class="roles">
+      {
+        experience.map((role) => (
+          <li class="role" data-reveal>
+            <p class="role__dates label">
+              {role.dates}
+              <span>{role.place}</span>
+            </p>
+            <div class="role__body">
+              <h3>
+                {role.title}, <span>{role.company}</span>
+              </h3>
+              {role.points.map((p) => (
+                <p>{p}</p>
+              ))}
+              {role.href && (
+                <a class="role__more" href={role.href}>
+                  Details above
+                </a>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="extras">
+      <div data-reveal>
+        <h3 class="label">What I work with</h3>
+        <dl class="skills">
+          {
+            skills.map((s) => (
+              <div>
+                <dt>{s.group}</dt>
+                <dd>{s.items}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+      <div data-reveal>
+        <h3 class="label">Education</h3>
+        <ul class="education">
+          {
+            education.map((e) => (
+              <li>
+                <strong>{e.degree}</strong>
+                <span>{e.school}</span>
+                <span class="label">{e.years}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
+  .history {
+    background: var(--paper-deep);
+    border-top: 1px solid var(--rule);
+  }
+
   .role {
     display: grid;
-    gap: 0.5rem 2rem;
-    padding-block: clamp(1.25rem, 3vw, 2rem);
+    gap: 0.4rem 2rem;
+    padding-block: clamp(1rem, 2.5vw, 1.5rem);
     border-top: 1px solid var(--rule);
   }
 
@@ -92,7 +98,8 @@ import { education, skills } from '../data/site';
 
   .role__body {
     display: grid;
-    gap: 0.6rem;
+    gap: 0.4rem;
+    max-width: 70ch;
   }
 
   .role h3 {
@@ -107,35 +114,14 @@ import { education, skills } from '../data/site';
     font-weight: 500;
   }
 
-  .role__about {
-    color: var(--ink-soft);
-    font-style: italic;
-  }
-
-  .role__body ul {
-    display: grid;
-    gap: 0.5rem;
-    max-width: 70ch;
+  .role__body p {
     color: var(--ink-soft);
   }
 
-  .role__body li {
-    padding-left: 1.1rem;
-    position: relative;
-  }
-
-  .role__body li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.7em;
-    width: 0.5rem;
-    height: 1.5px;
-    background: var(--ink);
-  }
-
-  .role__body strong {
-    color: var(--ink);
+  .role__more {
+    justify-self: start;
+    font-size: 0.9rem;
+    font-weight: 600;
   }
 
   .extras {

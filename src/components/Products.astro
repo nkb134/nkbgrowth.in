@@ -8,16 +8,20 @@ import jyotishIcon from '../assets/icons/tara-jyotish.png';
 import studioPoster from '../assets/tara/studio-poster.jpg';
 import bookCover from '../assets/tara/book-cover.webp';
 import bookPage from '../assets/tara/book-p05.webp';
-import { jyotish, jyotishChat, studio, traction } from '../data/products';
+import Icon from './Icon.astro';
+import arenaShot from '../assets/shots/arena.jpg';
+import { jyotish, jyotishChat, studio, traction, ventures } from '../data/products';
+
+const { rinnwealth, arena } = ventures;
 ---
 
 <section class="section wrap" id="products" aria-labelledby="products-title">
   <div class="section-head" data-reveal>
-    <p class="label">Building now</p>
-    <h2 id="products-title">Two AI products that <span class="hi">sell inside a chat</span></h2>
+    <p class="label">My own products</p>
+    <h2 id="products-title">Then I started building <span class="hi">the whole product</span></h2>
     <p>
-      Both run on WhatsApp, take payment by UPI without leaving the conversation, and are built and run by
-      me: onboarding, generation pipeline, payments and the acquisition funnel.
+      Two AI products that live in WhatsApp and take payment by UPI inside the chat. I built the onboarding,
+      the generation pipeline, the payments and the acquisition funnel myself.
     </p>
   </div>
 
@@ -47,7 +51,7 @@ import { jyotish, jyotishChat, studio, traction } from '../data/products';
             <source src="/media/tara-studio-demo.mp4" type="video/mp4" />
           </video>
         </Phone>
-        <figcaption>The video a new user gets as Tara’s first message. Press play; it has sound.</figcaption>
+        <figcaption>New users get this video as Tara’s first message. It has sound.</figcaption>
       </figure>
 
       <div class="outputs">
@@ -75,9 +79,42 @@ import { jyotish, jyotishChat, studio, traction } from '../data/products';
       name="Tara"
       icon={jyotishIcon}
       messages={jyotishChat}
-      caption="The live English onboarding script. Tara’s lines are the product’s own copy; Meera is a made-up user."
+      caption="This is the live English onboarding script. Tara’s lines are the product’s real copy. Meera is made up."
     />
   </Product>
+
+  <div class="ventures" id="ventures">
+    <article class="venture" data-reveal>
+      <header>
+        <h3>{rinnwealth.name}</h3>
+        <p class="label">{rinnwealth.role}</p>
+      </header>
+      <p class="venture__line">{rinnwealth.line}</p>
+      {rinnwealth.body.map((b) => <p class="venture__body">{b}</p>)}
+      <ul class="chips">
+        {rinnwealth.stack.map((s) => <li>{s}</li>)}
+      </ul>
+    </article>
+
+    <article class="venture venture--media" data-reveal>
+      <Image src={arenaShot} alt="Arena: a chess board mid-game with a move list and two clocks" width={640} loading="lazy" />
+      <div>
+        <header>
+          <h3>{arena.name}</h3>
+          <p class="label">{arena.role}</p>
+        </header>
+        <p class="venture__line">{arena.line}</p>
+        {arena.body.map((b) => <p class="venture__body">{b}</p>)}
+        <ul class="chips">
+          {arena.stack.map((s) => <li>{s}</li>)}
+        </ul>
+        <div class="venture__links">
+          <a class="btn btn--solid btn--small" href={arena.live} rel="noopener"><Icon name="play" />Watch a match</a>
+          <a class="btn btn--small" href={arena.repo} rel="noopener"><Icon name="github" />Code</a>
+        </div>
+      </div>
+    </article>
+  </div>
 </section>
 
 <style>
@@ -118,6 +155,86 @@ import { jyotish, jyotishChat, studio, traction } from '../data/products';
   .traction__note {
     margin-top: 0.7rem;
     margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .ventures {
+    display: grid;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    padding-top: clamp(2rem, 5vw, 3.5rem);
+    border-top: 1.5px solid var(--ink);
+    scroll-margin-top: 4.5rem;
+    align-items: start;
+  }
+
+  .venture,
+  .venture--media > div {
+    display: grid;
+    gap: 0.8rem;
+    align-content: start;
+  }
+
+  .venture {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: clamp(1.1rem, 2vw, 1.6rem);
+  }
+
+  .venture--media {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .venture--media > div {
+    padding: clamp(1.1rem, 2vw, 1.6rem);
+  }
+
+  .venture--media img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: 20% 35%;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .venture header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.3rem 1rem;
+  }
+
+  .venture h3 {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 800;
+    font-stretch: 80%;
+    line-height: 1;
+    letter-spacing: -0.015em;
+  }
+
+  .venture__line {
+    font-size: var(--step-1);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .venture__body {
+    max-width: var(--measure);
+    color: var(--ink-soft);
+  }
+
+  .venture__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.3rem;
+  }
+
+  @media (min-width: 60rem) {
+    .ventures {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
   .video {

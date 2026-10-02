@@ -13,7 +13,7 @@ interface Props {
     site: string;
     whatsapp: string;
     steps: string[];
-    features: { lead: string; text: string }[];
+    features: string[];
     stack: string[];
   };
 }
@@ -54,13 +54,7 @@ const host = new URL(product.site).hostname;
     <div class="product__block">
       <h4 class="label">What I built</h4>
       <ul class="features">
-        {
-          product.features.map((f) => (
-            <li>
-              <strong>{f.lead}.</strong> {f.text}
-            </li>
-          ))
-        }
+        {product.features.map((f) => <li>{f}</li>)}
       </ul>
     </div>
 
@@ -170,11 +164,19 @@ const host = new URL(product.site).hostname;
   }
 
   .features li {
+    position: relative;
+    padding-left: 1.1rem;
     color: var(--ink-soft);
   }
 
-  .features strong {
-    color: var(--ink);
+  .features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 0.5rem;
+    height: 1.5px;
+    background: var(--ink);
   }
 
   .product__demo {

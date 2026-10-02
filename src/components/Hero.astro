@@ -1,22 +1,21 @@
 ---
 import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
-import Slope from './Slope.astro';
 import portrait from '../assets/portrait.jpg';
-import { results, site } from '../data/site';
+import { site } from '../data/site';
+import { summary } from '../data/work';
 ---
 
 <section class="hero wrap" id="top">
   <div class="hero__copy">
     <p class="label">{site.name} · {site.role}</p>
     <h1>
-      I <span class="hi">grow</span> consumer products.<br />
-      And I <span class="hi">build</span> my own.
+      I <span class="hi">build</span> the things that make consumer products <span class="hi">grow</span>.
     </h1>
     <p class="hero__lede">
-      12+ years across consumer fintech, crypto and consumer AI in India and Southeast Asia. I rebuilt
-      referral into CoinDCX’s cheapest acquisition channel, took its crypto futures business from zero to
-      $72M ARR as P&amp;L owner, and now build and monetise generative-AI products on WhatsApp.
+      For 12+ years I’ve worked on consumer fintech, crypto and now consumer AI, in India and Southeast Asia.
+      At CoinDCX I rebuilt the referral product, started the creator channel and ran the futures business as
+      its P&amp;L owner. Today I build my own AI products on WhatsApp and do the growth work on them myself.
     </p>
     <div class="hero__actions">
       <a class="btn btn--solid" href={`mailto:${site.email}`}><Icon name="mail" />Email me</a>
@@ -41,11 +40,26 @@ import { results, site } from '../data/site';
   </figure>
 </section>
 
-<section class="results wrap" id="results" aria-labelledby="results-title">
-  <h2 class="label" id="results-title">Before and after: six numbers I was responsible for</h2>
-  <div class="results__grid">
-    {results.map((r) => <Slope {...r} />)}
-  </div>
+<section class="both wrap" aria-label="Summary">
+  {
+    [summary.grow, summary.build].map((side, i) => (
+      <div class:list={['both__side', i === 1 && 'both__side--build']} data-reveal>
+        <h2 class="label">{side.title}</h2>
+        <dl>
+          {side.stats.map((s) => (
+            <div>
+              <dt>{s.label}</dt>
+              <dd>{s.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <a href={side.href}>
+          {side.link}
+          <Icon name="arrow-down" />
+        </a>
+      </div>
+    ))
+  }
 </section>
 
 <style>
@@ -62,8 +76,9 @@ import { results, site } from '../data/site';
   }
 
   h1 {
+    max-width: 17ch;
     font-family: var(--font-display);
-    font-size: var(--step-4);
+    font-size: clamp(2.75rem, 1rem + 6.4vw, 6.5rem);
     font-weight: 800;
     font-stretch: 75%;
     line-height: 0.92;
@@ -76,9 +91,8 @@ import { results, site } from '../data/site';
       animation: swipe 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.35s both;
     }
 
-    h1 .hi + br + .hi,
     h1 .hi:last-of-type {
-      animation-delay: 0.75s;
+      animation-delay: 0.85s;
     }
 
     @keyframes swipe {
@@ -127,25 +141,69 @@ import { results, site } from '../data/site';
     line-height: 1.3;
   }
 
-  .results {
-    padding-bottom: var(--section);
-  }
-
-  .results > h2 {
-    padding-bottom: 0.9rem;
-    margin-bottom: 1.25rem;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .results__grid {
+  /* Two halves of one band: company work on highlighter, own products on ink. */
+  .both {
     display: grid;
-    gap: clamp(0.75rem, 1.5vw, 1.25rem);
+    border: 1.5px solid var(--ink);
+    border-radius: var(--radius);
+    overflow: hidden;
   }
 
-  @media (min-width: 34rem) {
-    .results__grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .both__side {
+    display: grid;
+    gap: 1.25rem;
+    padding: clamp(1.25rem, 3vw, 2.25rem);
+    background: var(--hi);
+  }
+
+  .both__side--build {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .both__side .label {
+    color: inherit;
+  }
+
+  .both dl {
+    display: grid;
+    gap: 1rem 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+    margin: 0;
+  }
+
+  .both dl div {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 0.3rem;
+  }
+
+  .both dd {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    font-weight: 800;
+    font-stretch: 76%;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+
+  .both dt {
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+
+  .both a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    justify-self: start;
+    font-weight: 600;
+  }
+
+  .both__side--build :global(:focus-visible) {
+    outline-color: var(--hi);
   }
 
   @media (min-width: 60rem) {
@@ -157,8 +215,8 @@ import { results, site } from '../data/site';
       width: 100%;
     }
 
-    .results__grid {
-      grid-template-columns: repeat(3, 1fr);
+    .both {
+      grid-template-columns: 1fr 1fr;
     }
   }
 </style>

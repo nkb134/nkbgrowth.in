@@ -15,33 +15,21 @@ export const traction = [
 export const studio = {
   name: 'Tara AI Studio',
   role: 'Founder · 2026 to present',
-  tagline: 'One photo in. Stickers, a storybook or a photoshoot out, inside WhatsApp.',
+  tagline: 'Send one photo, get stickers of your own face back.',
   description:
-    'Send Tara one photo on WhatsApp. She makes a cartoon avatar for free, then sells ten animated stickers of your face, a personalised children’s storybook as a PDF or narrated video, or a retouched portrait. Payment is a UPI QR in the same chat.',
+    'You send Tara a photo on WhatsApp and she makes a cartoon avatar of you for free. If you like it, you can buy ten animated stickers of that face, a storybook starring your child, or a retouched portrait. You pay by UPI without leaving the chat.',
   site: 'https://tara-ai.studio',
   whatsapp: 'https://tara-ai.studio/wa?t=sticker&l=en',
   steps: [
-    'A photo comes in and is screened; one avatar is generated free and the user approves or corrects it.',
-    'A single pay bubble arrives in chat: UPI QR plus a pay button.',
-    'Payment starts the generation job; the result lands in the same chat a few minutes later.',
+    'You send a photo. Tara checks it, makes one free avatar, and you approve it or ask for a fix.',
+    'One pay message arrives in the chat, with a UPI QR and a pay button.',
+    'Once the payment lands, the job starts. The stickers or the book arrive in the same chat a few minutes later.',
   ],
   features: [
-    {
-      lead: 'Animated sticker packs',
-      text: 'One avatar becomes a pose sheet, then ten two-second clips, colour-keyed into WhatsApp stickers under 500 KB each.',
-    },
-    {
-      lead: 'Personalised storybooks',
-      text: 'Four human-written books. The child’s character is composited into pre-drawn plates and typeset into a 14-page PDF, or a video with narration, music and sound effects.',
-    },
-    {
-      lead: 'Photo edits',
-      text: 'Natural glow, studio portrait, model photoshoot and cartoon styles from a single selfie.',
-    },
-    {
-      lead: 'Jobs that survive failure',
-      text: 'Generation runs on a vendor fallback ladder (Vertex AI, fal.ai, OpenRouter, Higgsfield). Vendor handles are saved before waiting, so a crash resumes the job instead of buying it twice.',
-    },
+    'Sticker packs. One avatar becomes a pose sheet, then ten two-second clips, each keyed into a WhatsApp sticker under 500 KB.',
+    'Storybooks. There are four human-written books. The pipeline draws the child into pre-made pages and typesets a 14-page PDF, or cuts a video with narration, music and sound effects.',
+    'Photo edits in four styles: natural glow, studio portrait, model photoshoot and cartoon.',
+    'A fallback chain across four vendors (Vertex AI, fal.ai, OpenRouter, Higgsfield). The job saves each vendor handle before it waits, so a crash resumes the job and I don’t pay for it twice.',
   ],
   stack: [
     'Node.js',
@@ -61,41 +49,23 @@ export const studio = {
 export const jyotish = {
   name: 'Tara Jyotish',
   role: 'Founder · 2026 to present',
-  tagline: 'A Vedic astrology reading that happens in a WhatsApp chat.',
+  tagline: 'A Vedic astrology reading, done over WhatsApp chat.',
   description:
-    'An AI astrology assistant. Tara collects birth details in conversation, casts the chart with Swiss Ephemeris, sends the kundli and one free reading, then sells further chat time in ten-minute blocks paid by UPI.',
+    'Tara is an AI astrology assistant. She asks for your birth details in conversation, works out the chart with Swiss Ephemeris, and sends back your kundli with one free reading. After that you buy her time in ten-minute blocks over UPI.',
   site: 'https://tarajyotish.in',
   whatsapp: 'https://wa.me/918050328368?text=Namaste',
   steps: [
-    'Name, date, time and place of birth are collected in any order, then confirmed on one card.',
-    'The chart is calculated on the server and sent back as a kundli image with one free reading.',
-    'A UPI QR in the chat buys ten minutes; a session clock meters the paid time.',
+    'You give your name and your date, time and place of birth, in any order. Tara confirms them on one card.',
+    'The server calculates the chart and sends the kundli image with one free reading.',
+    'A UPI QR in the chat buys ten minutes, and a session clock tracks the paid time.',
   ],
   features: [
-    {
-      lead: 'Replies in the user’s language and script',
-      text: 'Eleven languages, with the click-to-WhatsApp ad creative seeding the first reply.',
-    },
-    {
-      lead: 'Deterministic astrology, generated prose',
-      text: 'Planet positions come from Swiss Ephemeris and a JSON knowledge base; the model only writes the reading.',
-    },
-    {
-      lead: 'In-chat paywall with price experiments',
-      text: 'Razorpay link plus UPI QR, with price ladders pinned per user by acquisition route.',
-    },
-    {
-      lead: 'Family charts and kundli matching',
-      text: 'One account can hold several charts and compare two of them.',
-    },
-    {
-      lead: 'Crisis guard',
-      text: 'Messages that signal distress get a helpline reply in the user’s script and are never billed.',
-    },
-    {
-      lead: 'Closed-loop attribution',
-      text: 'Ad click ids are captured on the first message and purchases are sent back through the Meta Conversions API.',
-    },
+    'Tara replies in the user’s own language and script, across eleven languages. The ad someone clicked decides the language of her first reply.',
+    'Planet positions come from Swiss Ephemeris and a JSON knowledge base. The model only writes the reading.',
+    'The paywall sits in the chat: a Razorpay link and a UPI QR, with price ladders pinned per user by where they came from.',
+    'One account can hold several family charts and match two of them.',
+    'If a message signals distress, Tara replies with a helpline in the user’s script and never bills for it.',
+    'Ad click ids are captured on the first message, and purchases go back to Meta through the Conversions API.',
   ],
   stack: [
     'Node.js',
@@ -108,6 +78,32 @@ export const jyotish = {
     'Railway',
     'GitHub Actions',
   ],
+};
+
+/** Smaller things, shown as cards under the two products. */
+export const ventures = {
+  rinnwealth: {
+    name: 'RinnWealth',
+    role: 'Founder & CPO · Mar 2026 to Sep 2026',
+    line: 'Automated home-loan prepayment. Pre-launch.',
+    body: [
+      'I defined the product, the pricing and the partner integrations on UPI Autopay and BBPS rails, and owned GTM and unit economics.',
+      'Axis Bank and Setu signed on as launch partners. I also led the NPCI approval path, in a category that had no playbook.',
+    ],
+    stack: ['UPI Autopay', 'BBPS', 'NPCI', 'Axis Bank', 'Setu'],
+  },
+  arena: {
+    name: 'Arena',
+    role: 'Side project',
+    line: 'Two language models play chess on a clock that really runs.',
+    body: [
+      'Each model is told how much time it has left and gets a token budget to match, so the only way to play faster is to think less.',
+      'Stockfish scores every move, and recorded matches replay at their real timings.',
+    ],
+    stack: ['Python', 'Stockfish', 'Gemini on Vertex', 'TypeScript'],
+    live: 'https://nkb134.github.io/ai-battle-royale/',
+    repo: 'https://github.com/nkb134/ai-battle-royale',
+  },
 };
 
 /**
@@ -154,7 +150,7 @@ export const jyotishChat: ChatMessage[] = [
   {
     from: 'bot',
     kind: 'note',
-    text: 'A free reading follows here, written by the model from this chart.',
+    text: 'A free reading goes here. The model writes it from this chart.',
   },
   {
     from: 'bot',

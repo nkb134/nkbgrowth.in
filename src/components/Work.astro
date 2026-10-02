@@ -1,0 +1,149 @@
+---
+import Case from './Case.astro';
+import { companies } from '../data/work';
+---
+
+<section class="section wrap" id="company" aria-labelledby="company-title">
+  <div class="section-head" data-reveal>
+    <p class="label">Company work</p>
+    <h2 id="company-title">What I built as <span class="hi">head of growth</span></h2>
+    <p>
+      I led growth at CoinDCX for three years, then at Ajaib. Each number below moved because of something I
+      built or rebuilt there.
+    </p>
+  </div>
+
+  {
+    companies.map((c) => (
+      <article class="company" id={c.id}>
+        <header class="company__head" data-reveal>
+          <div>
+            <h3>{c.name}</h3>
+            <p class="company__about">{c.about}</p>
+          </div>
+          <div class="company__meta">
+            <p class="company__role">{c.role}</p>
+            <p class="label">
+              {c.dates} · {c.place}
+            </p>
+            <ul class="chips">
+              {c.scope.map((s) => (
+                <li>{s}</li>
+              ))}
+            </ul>
+          </div>
+        </header>
+
+        <div class:list={['company__cases', c.cases.length <= 2 && 'company__cases--pair']}>
+          {c.cases.map((cs) => (
+            <Case {...cs} />
+          ))}
+        </div>
+
+        {c.also.length > 0 && (
+          <ul class="company__also" data-reveal>
+            {c.also.map((a) => (
+              <li>
+                <span class="label">{a.lead}</span>
+                {a.text}
+              </li>
+            ))}
+          </ul>
+        )}
+      </article>
+    ))
+  }
+</section>
+
+<style>
+  .company {
+    padding-block: clamp(1.75rem, 4vw, 3rem);
+    border-top: 1.5px solid var(--ink);
+    scroll-margin-top: 4.5rem;
+  }
+
+  .company + .company {
+    margin-top: clamp(1rem, 3vw, 2rem);
+  }
+
+  .company__head {
+    display: grid;
+    gap: 1rem 2rem;
+    margin-bottom: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    font-weight: 800;
+    font-stretch: 76%;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+
+  .company__about {
+    margin-top: 0.4rem;
+    color: var(--ink-soft);
+  }
+
+  .company__meta {
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+  }
+
+  .company__role {
+    font-size: var(--step-1);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .company__cases {
+    display: grid;
+    gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  }
+
+  .company__also {
+    display: grid;
+    gap: 1.25rem;
+    align-content: start;
+    margin-top: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .company__also li {
+    display: grid;
+    gap: 0.3rem;
+    max-width: var(--measure);
+    color: var(--ink-soft);
+  }
+
+  .company__also .label {
+    color: var(--ink);
+  }
+
+  @media (min-width: 40rem) {
+    .company__cases {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 60rem) {
+    .company__head {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: end;
+    }
+
+    .company__cases {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .company__cases--pair {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .company__also {
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(1.5rem, 4vw, 3.5rem);
+    }
+  }
+</style>
